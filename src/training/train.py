@@ -39,10 +39,10 @@ from datasets import load_dataset
 from transformers import (
     AutoModelForQuestionAnswering,
     AutoTokenizer,
+    DataCollatorWithPadding,
     Trainer,
     TrainerCallback,
     TrainingArguments,
-    default_data_collator,
     set_seed,
 )
 
@@ -74,7 +74,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--eval_samples", type=int, default=2000,
                    help="Subconjunto de validación para eval_loss durante el "
                         "entrenamiento (0 = todo). El EM/F1 completo va en evaluate.py.")
-    p.add_argument("--save_steps", type=int, default=500)
+    p.add_argument("--save_steps", type=int, default=2000)
     p.add_argument("--save_total_limit", type=int, default=3)
     p.add_argument("--logging_steps", type=int, default=50)
     p.add_argument("--no_resume", action="store_true",
@@ -164,7 +164,7 @@ def prepare_train_features(examples, tokenizer, max_len: int, stride: int):
         stride=stride,
         return_overflowing_tokens=True,
         return_offsets_mapping=True,
-        padding="max_length",
+        padding=False,  # el padding es dinámico (DataCollatorWithPadding)
     )
     sample_map = tokenized.pop("overflow_to_sample_mapping")
     offset_mapping = tokenized.pop("offset_mapping")
@@ -377,7 +377,8 @@ def main() -> None:
         args=build_training_args(args, paths, len(train_ds)),
         train_dataset=train_ds,
         eval_dataset=val_ds,
-        data_collator=default_data_collator,
+        data_collator=DataCollatorWithPadding(
+            tokenizer, pad_to_multiple_of=8 if torch.cuda.is_available() else None),
         callbacks=[DriveCsvLogger(paths["logs"])],
         **{tok_key: tokenizer},
     )

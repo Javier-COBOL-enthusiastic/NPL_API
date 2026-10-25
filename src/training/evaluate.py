@@ -268,6 +268,8 @@ def parse_args():
     p.add_argument("--drive_root", default="/content/drive/MyDrive/ExtractiveQA")
     p.add_argument("--model_dir", default=None, help="Por defecto: <drive_root>/final_model")
     p.add_argument("--public_sample", default=None, help="Ruta a public_sample.json")
+    p.add_argument("--results_dir", default=None,
+                   help="Por defecto: <drive_root>/results. Usa otra carpeta para comparar checkpoints sin pisar resultados.")
     p.add_argument("--max_seq_length", type=int, default=None)
     p.add_argument("--doc_stride", type=int, default=None)
     p.add_argument("--batch_size", type=int, default=64)
@@ -283,7 +285,7 @@ def main() -> None:
     args = parse_args()
     root = Path(args.drive_root)
     model_dir = Path(args.model_dir) if args.model_dir else root / "final_model"
-    results_dir = root / "results"
+    results_dir = Path(args.results_dir) if args.results_dir else root / "results"
     results_dir.mkdir(parents=True, exist_ok=True)
 
     hp = load_run_config(root).get("hyperparameters", {})
