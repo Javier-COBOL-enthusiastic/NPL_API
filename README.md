@@ -28,36 +28,6 @@ Se conservan las dependencias de entrenamiento; `tqdm` se declara explícitament
 porque evaluación lo importa. PyTorch requiere al menos 2.6 para la carga segura
 de pesos `.bin`, y Pydantic se mantiene en su API 2.x.
 
-## Recibir el modelo de Javier
-
-Copiar el export completo, sin renombrar archivos ni subir pesos a Git:
-
-```text
-models/
-  final_model/
-    config.json
-    model.safetensors                 # o pytorch_model.bin
-    tokenizer.json                    # y vocabulario/archivos que exportó el tokenizer
-    tokenizer_config.json
-    special_tokens_map.json           # si fue exportado
-    postprocess_config.json           # generado por evaluate.py sobre validación completa
-    run_config.json                   # copia de config/run_config.json de train.py
-```
-
-Si los pesos están divididos, incluir el índice y todos los shards. Copiar TODOS
-los archivos producidos por `save_pretrained()`, no solo los enumerados.
-`postprocess_config.json` debe contener `threshold`, `max_seq_length`, `doc_stride`,
-`n_best` y `max_answer_len`. No hay umbral predeterminado. La evaluación de un
-subconjunto no copia su umbral a `final_model/`; Javier debe ejecutar la validación
-completa para producir el artefacto final.
-
-El checkpoint base se obtiene de `base_checkpoint` en `run_config.json`, nunca del
-nombre de una carpeta ni del valor por defecto del entrenamiento. También se admite
-la estructura original `models/config/run_config.json`, junto a `final_model/`.
-Si no se dispone del archivo, configurar `QA_BASE_MODEL` con el identificador exacto
-confirmado por Javier. Si contradice los metadatos, se rechaza la carga.
-`params` se calcula contando los parámetros del modelo cargado.
-
 ## Configurar y ejecutar
 
 En la misma terminal PowerShell, desde la raíz:
