@@ -1,3 +1,44 @@
+# Local environments and credentials (never commit tokens).
+.venv/
+venv/
+env/
 .env
+.env.*
+!.env.example
+credentials*.json
+*service-account*.json
+*service_account*.json
+.secrets/
+*.pem
+*.key
+
+# Python/editor caches and temporary output; keep reports and training logs.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+*.egg-info/
+tmp/
+temp/
+*.tmp
+qa-service*.log
+*.zip
 .zip
+
+# Local models, training checkpoints and large tensor artifacts.
+models/
+final_model/
+checkpoints/
+checkpoint-*/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx
+*.h5
 
