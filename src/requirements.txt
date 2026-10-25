@@ -1,0 +1,16 @@
+# --- Núcleo (entrenamiento, evaluación e inferencia) ---
+torch>=2.1
+transformers>=4.46
+datasets>=2.19
+accelerate>=0.26
+numpy>=1.24
+safetensors>=0.4
+
+# --- Servicio (API local en CPU) ---
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+
+# --- Pruebas ---
+pytest>=8.0
+httpx>=0.27
