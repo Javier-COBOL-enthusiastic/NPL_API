@@ -1,0 +1,1 @@
+.\.venv\Scripts\python.exe -m uvicorn src.service.app:app --env-file .env --host 127.0.0.1 --port 8000 --workers 1
