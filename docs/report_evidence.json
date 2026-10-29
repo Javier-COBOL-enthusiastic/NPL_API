@@ -1,0 +1,229 @@
+{
+  "description": "Existing local evidence copied for REPORT.md; no new training or benchmark was run. Model weights and credentials are excluded.",
+  "sources": {
+    "training": "models/final_model/run_config.json",
+    "calibration": "models/final_model/postprocess_config.json",
+    "local_http_test": "tmp/qa-real-cpu/results.json",
+    "earlier_notebook": "src/training/extractive_qa_colab.ipynb"
+  },
+  "run_config": {
+    "base_checkpoint": "distilbert/distilbert-base-uncased",
+    "dataset": "rajpurkar/squad_v2",
+    "num_parameters": 66364418,
+    "hyperparameters": {
+      "model_name": "distilbert/distilbert-base-uncased",
+      "max_seq_length": 384,
+      "doc_stride": 128,
+      "epochs": 3.0,
+      "learning_rate": 3e-05,
+      "batch_size": 8,
+      "grad_accum": 1,
+      "warmup_ratio": 0.1,
+      "weight_decay": 0.01,
+      "seed": 42,
+      "train_samples": 0,
+      "eval_samples": 2000,
+      "save_steps": 2000,
+      "save_total_limit": 2,
+      "logging_steps": 50,
+      "no_resume": false,
+      "allow_squad_checkpoint": false
+    },
+    "data_counts": {
+      "train_examples": 130319,
+      "train_features": 131754,
+      "eval_examples": 2000,
+      "eval_features": 2039
+    },
+    "environment": {
+      "python": "3.13.16",
+      "torch": "2.11.0+cu130",
+      "transformers": "5.20.2",
+      "datasets": "5.0.1",
+      "cuda_available": true,
+      "gpu": "Tesla T4"
+    },
+    "started_at": "2026-10-25 22:02:24"
+  },
+  "postprocess_config": {
+    "threshold": -3.0664472656250004,
+    "rule": "predict null if delta > threshold, delta = null_score - span_score",
+    "score": "sigmoid(|delta - threshold|)",
+    "selection_metric": "SQuAD 2.0 F1 on validation",
+    "max_seq_length": 384,
+    "doc_stride": 128,
+    "n_best": 20,
+    "max_answer_len": 30,
+    "val_f1": 70.38989730396112,
+    "val_exact": 67.57348606081024,
+    "validation_examples": 11873
+  },
+  "local_cpu_test": {
+    "team_is_temporary": true,
+    "base_url": "http://127.0.0.1:8000",
+    "cases": [
+      {
+        "id": "sample-01",
+        "response": {
+          "id": "sample-01",
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458
+        },
+        "expected": [
+          {
+            "text": "16",
+            "start": 383
+          },
+          {
+            "text": "16 attention heads",
+            "start": 383
+          }
+        ],
+        "correct": true,
+        "http_seconds": 0.0845402000049944,
+        "under_5_seconds": true,
+        "status": 200
+      },
+      {
+        "id": "sample-02",
+        "response": {
+          "id": "sample-02",
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697
+        },
+        "expected": [
+          {
+            "text": "3.5 days",
+            "start": 437
+          }
+        ],
+        "correct": true,
+        "http_seconds": 0.07741840000380762,
+        "under_5_seconds": true,
+        "status": 200
+      },
+      {
+        "id": "sample-03",
+        "response": {
+          "id": "sample-03",
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243
+        },
+        "expected": null,
+        "correct": true,
+        "http_seconds": 0.071363899995049,
+        "under_5_seconds": true,
+        "status": 200
+      },
+      {
+        "id": "sample-04",
+        "response": {
+          "id": "sample-04",
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385
+        },
+        "expected": null,
+        "correct": true,
+        "http_seconds": 0.0901847999994061,
+        "under_5_seconds": true,
+        "status": 200
+      },
+      {
+        "id": "sample-05",
+        "response": {
+          "id": "sample-05",
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239
+        },
+        "expected": [
+          {
+            "text": "50,257",
+            "start": 3157
+          },
+          {
+            "text": "50,257 tokens",
+            "start": 3157
+          }
+        ],
+        "correct": true,
+        "http_seconds": 0.6954640999974799,
+        "under_5_seconds": true,
+        "status": 200
+      }
+    ],
+    "process_start_to_ready_seconds": 9.267242000001715,
+    "health_statuses_seen": [
+      200,
+      503
+    ],
+    "health": {
+      "status": "ok"
+    },
+    "info_unauthorized_status": 401,
+    "info": {
+      "team": "team-local",
+      "model": "distilbert/distilbert-base-uncased",
+      "params": 66364418,
+      "max_seq_length": 384,
+      "doc_stride": 128
+    },
+    "runtime": {
+      "imports_seconds": 7.038001900000381,
+      "load_and_warmup_seconds": 1.3258379000035347,
+      "loader_total_seconds": 8.363839800003916,
+      "device": "cpu",
+      "threads": 4,
+      "batch_size": 8,
+      "info": {
+        "team": "team-local",
+        "model": "distilbert/distilbert-base-uncased",
+        "params": 66364418,
+        "max_seq_length": 384,
+        "doc_stride": 128
+      }
+    },
+    "inference_measurements": [
+      {
+        "id": "sample-01",
+        "inference_seconds": 0.07999670000572223
+      },
+      {
+        "id": "sample-02",
+        "inference_seconds": 0.07404430000315187
+      },
+      {
+        "id": "sample-03",
+        "inference_seconds": 0.06848159999935888
+      },
+      {
+        "id": "sample-04",
+        "inference_seconds": 0.0865235000019311
+      },
+      {
+        "id": "sample-05",
+        "inference_seconds": 0.6918607999978121
+      }
+    ],
+    "total_http_seconds": 1.018971400000737,
+    "mean_http_seconds": 0.2037942800001474,
+    "max_http_seconds": 0.6954640999974799,
+    "projection_50_at_sample_mean_seconds": 10.18971400000737,
+    "correct_count": 5
+  },
+  "artifact_sizes_bytes": {
+    "model.safetensors": 265470032,
+    "complete_six_file_export": 266183844
+  },
+  "hardware": {
+    "cpu": "AMD Ryzen 5 8645HS w/ Radeon 760M Graphics",
+    "physical_cores": 6,
+    "logical_processors": 12,
+    "os_visible_ram_bytes": 16390729728,
+    "ram_note": "Read from Win32_ComputerSystem while preparing the report; RAM was not recorded by the original benchmark."
+  }
+}
