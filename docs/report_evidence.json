@@ -4,7 +4,10 @@
     "training": "models/final_model/run_config.json",
     "calibration": "models/final_model/postprocess_config.json",
     "local_http_test": "tmp/qa-real-cpu/results.json",
-    "earlier_notebook": "src/training/extractive_qa_colab.ipynb"
+    "earlier_notebook": "src/training/extractive_qa_colab.ipynb",
+    "final_eval_summary": "docs/evaluation/final/eval_summary.json",
+    "checkpoint_16000_eval_summary": "docs/evaluation/epoch1/eval_summary.json",
+    "training_logs": "docs/training_logs/"
   },
   "run_config": {
     "base_checkpoint": "distilbert/distilbert-base-uncased",
@@ -225,5 +228,148 @@
     "logical_processors": 12,
     "os_visible_ram_bytes": 16390729728,
     "ram_note": "Read from Win32_ComputerSystem while preparing the report; RAM was not recorded by the original benchmark."
+  },
+  "team_supplied_training_clarifications": {
+    "source": "User-provided training review in this conversation, 2026-10-29.",
+    "verification_status": "Both evaluation summaries confirm the reported full-validation metrics. The supplied training logs now confirm checkpoint-16000 as the automatic best-loss model (1.2546775), epoch-3 loss 1.6062064 and a distinct post-restore loss of 1.2545213. The final checkpoint-49410 export identity remains team-confirmed; summaries have no checkpoint-id field. No-abstention metrics and threshold stability range remain team-supplied without the threshold sweep artifact.",
+    "validation": {
+      "examples": 11873,
+      "answerable": 5928,
+      "unanswerable": 5945,
+      "training_loss_subset": 2000,
+      "subset_is_from_same_validation_split": true,
+      "fixed_random_subset": true,
+      "checkpoint_and_threshold_selected_on_full_validation": true,
+      "separate_held_out_test_set": false
+    },
+    "selected_checkpoint": {
+      "id": "checkpoint-49410",
+      "epoch": 3,
+      "exact_percent": 67.57,
+      "f1_percent": 70.39,
+      "threshold": -3.0664472656250004,
+      "has_ans_f1_percent": 67.08,
+      "no_ans_accuracy_percent": 73.69,
+      "predicted_null_percent": 49.2,
+      "true_unanswerable_percent": 50.07,
+      "eval_summary_path": "docs/evaluation/final/eval_summary.json"
+    },
+    "trainer_selected_checkpoint": {
+      "id": "checkpoint-16000",
+      "epoch_approx": 1,
+      "subset_eval_loss": 1.2547,
+      "exact_percent": 63.51,
+      "f1_percent": 66.19,
+      "threshold_approx": -0.038,
+      "eval_summary_path": "docs/evaluation/epoch1/eval_summary.json"
+    },
+    "epoch_3_subset_eval_loss_approx": 1.6,
+    "without_abstention": {
+      "has_ans_f1_percent": 84.76,
+      "overall_f1_percent": 42.32
+    },
+    "threshold_zero": {
+      "f1_percent": 69.54,
+      "has_ans_f1_percent": 74.99,
+      "no_ans_accuracy_percent": 64.1
+    },
+    "calibration_gain_f1_points": 0.85,
+    "threshold_range_within_0_5_f1_points_of_optimum": [
+      -4.4,
+      -0.9
+    ],
+    "alternative_considered": {
+      "models": [
+        "BERT-base",
+        "RoBERTa-base"
+      ],
+      "layers": 12,
+      "parameters_millions_approx": [
+        110,
+        125
+      ],
+      "trained_or_benchmarked": false,
+      "estimated_cpu_cost_relative_to_distilbert": 2,
+      "reason_rejected": "Conservative pre-measurement CPU latency estimate against the 5-second limit; measured DistilBERT mean of 0.20 seconds later showed substantial headroom."
+    }
+  },
+  "verified_checkpoint_comparison": {
+    "source_paths": [
+      "docs/evaluation/epoch1/eval_summary.json",
+      "docs/evaluation/final/eval_summary.json"
+    ],
+    "examples": 11873,
+    "f1_gain_points": 4.197641686745342,
+    "exact_gain_points": 4.059631095763493,
+    "note": "Each checkpoint is evaluated at its own calibrated threshold on the same validation split; this is not an independent test comparison."
+  },
+  "team_supplied_execution_updates": {
+    "source": "User-provided update in this conversation, 2026-10-29.",
+    "public_service_url": "https://underwent-purge-chase.ngrok-free.dev",
+    "ai_tools": {
+      "Codex": "API, authentication, tests, Windows/ngrok launcher, local verification and report drafting.",
+      "Claude": "Training notebook, train.py and evaluation script (called eval.py by the team; evaluate.py in the repository)."
+    },
+    "training_duration_estimate": {
+      "hours_per_epoch": 3.5,
+      "epochs": 3,
+      "estimated_total_hours": 10.5,
+      "measured": false,
+      "note": "Approximation supplied by the team; not reconstructed from training logs or resumed-session timestamps.",
+      "status": "Superseded by verified_training_logs elapsed interval; not used as a measured duration."
+    },
+    "preliminary_tunnel_test": {
+      "reported_response_time_ms_approx": 68,
+      "endpoint": null,
+      "payload": null,
+      "sample_count": null,
+      "independently_verified": false,
+      "note": "Simple requests reported by the team; does not establish a QA inference mean or compliance for long inputs. Longer questions/contexts and full-workload HTTPS tests remain pending."
+    }
+  },
+  "verified_training_logs": {
+    "source": "User-supplied logs.zip; original files preserved unchanged in docs/training_logs/.",
+    "original_files_sha256": {
+      "docs/training_logs/loss_curves_original.png": "f38e66a1fa4b5f7022e69c2db6c7198c63e0227d730cc12f3442f37c2752f266",
+      "docs/training_logs/eval_metrics.csv": "16b5c4a3f213c21c8e45a14de476ddc4ca5f1945a16d216aa0d289887ee22c56",
+      "docs/training_logs/log_history.json": "58850e62bbf29df090aa6b32bc9a1e5ee78013849b0ed69e1eb16d30f400e02d",
+      "docs/training_logs/training_log.txt": "3a35d22e20f12357c93691ea99917d083a5ae688ccf7ee38208ac3f3aeb5e0b9",
+      "docs/training_logs/final_metrics.json": "415d3e02a9f04ee1bbd005cde16162f6690c508ca89ba5b7a1819fadb840c90a",
+      "docs/training_logs/train_metrics.csv": "c97d5e2fcb74e0ad5481986b5535d6d5f23d1358475ba600cdadafbe619b67d8"
+    },
+    "training_history_records": 988,
+    "training_time_validation_records": 99,
+    "minimum_training_time_validation": {
+      "epoch": 0.9714632665452337,
+      "eval_loss": 1.2546775341033936,
+      "eval_runtime": 31.1349,
+      "eval_samples_per_second": 65.489,
+      "eval_steps_per_second": 4.111,
+      "step": 16000
+    },
+    "epoch_3_validation_before_restore": {
+      "eval_loss": 1.6062064170837402,
+      "eval_runtime": 26.2282,
+      "eval_samples_per_second": 77.741,
+      "eval_steps_per_second": 4.88,
+      "epoch": 3.0,
+      "step": 49410
+    },
+    "post_restore_validation": {
+      "eval_loss": 1.2545212507247925,
+      "eval_runtime": 26.353,
+      "eval_samples_per_second": 77.373,
+      "eval_steps_per_second": 4.857,
+      "epoch": 3.0,
+      "step": 49410
+    },
+    "trainer_best_checkpoint": "checkpoint-16000",
+    "first_training_start_log_clock": "2026-10-25T15:55:54.916000",
+    "completion_log_clock": "2026-10-25T22:50:21.195000",
+    "elapsed_seconds_including_interruptions_and_overhead": 24866.279,
+    "last_resumed_call_train_runtime_seconds": 2845.0365,
+    "total_active_training_seconds": null,
+    "time_note": "Elapsed log-clock interval, not summed active computation. Logs do not supply interrupted-session stop times. No timezone assumed.",
+    "curve_note": "The original plot merges the post-restore evaluation into the training curve. loss_curves.png reconstructs log_history.json with that evaluation as a separate marker; epoch-3 loss remains 1.6062."
   }
 }

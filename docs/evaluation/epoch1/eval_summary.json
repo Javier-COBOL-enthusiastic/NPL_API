@@ -1,0 +1,23 @@
+{
+  "examples": 11873,
+  "subset": false,
+  "at_delta_0": {
+    "threshold": 0.0,
+    "exact": 63.42120778236334,
+    "f1": 66.13193782660532,
+    "has_ans_f1": 60.64178438179574,
+    "no_ans_acc": 71.60639192598822,
+    "null_rate": 51.35180662006233
+  },
+  "at_best_threshold": {
+    "threshold": -0.03846874999999983,
+    "exact": 63.51385496504675,
+    "f1": 66.19225561721578,
+    "has_ans_f1": 60.30712735209228,
+    "no_ans_acc": 72.06055508830951,
+    "null_rate": 51.79819759117324
+  },
+  "span_violations": 0,
+  "answerable": 5928,
+  "unanswerable": 5945
+}
