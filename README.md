@@ -109,6 +109,42 @@ No se garantiza todavía el límite de 5 s ni el promedio inferior a 3 s (150 s 
 
 ## Túnel HTTPS (solo en la etapa de presentación)
 
+### Lanzador Windows con dominio fijo de ngrok
+
+Con ngrok instalado y autenticado en tu cuenta, agrega a tu `.env` existente:
+
+```dotenv
+NGROK_DOMAIN=tu-dominio-asignado.ngrok-free.app
+# Solo si ngrok.exe no esta en PATH:
+# NGROK_PATH=C:/herramientas/ngrok/ngrok.exe
+```
+
+Reemplaza el ejemplo por el dominio exacto asignado en tu panel de ngrok, incluyendo
+su sufijo real. También se acepta `https://` delante. Mantén `QA_API_TOKEN`, `QA_TEAM`
+y `QA_MODEL_DIR` en ese mismo `.env`. La autenticación de la cuenta ngrok es distinta
+del token de la API; usa la configuración de ngrok que ya tengas o `NGROK_AUTHTOKEN`
+en tu `.env` privado. No compartas ninguno de los tokens.
+
+Haz doble clic en **`iniciar_ngrok.bat`**, o ejecuta ` .\iniciar_ngrok.bat` desde
+PowerShell. No requiere compilar un `.exe` ni instalar dependencias adicionales.
+Carga `.env` (el entorno existente tiene prioridad), inicia Uvicorn con un worker,
+espera hasta 180 segundos a `/health=ok`, verifica autenticación y después ejecuta
+ngrok con `--url` y el dominio configurado. Si falta `NGROK_DOMAIN`, lo solicita
+en la consola sin guardarlo. La URL solo estará publicada cuando ngrok confirme
+que se conectó; comprueba `https://TU-DOMINIO/health` desde otra red.
+
+Mantén la ventana abierta. **Ctrl+C detiene ambos procesos**; usa esa opción antes
+de cerrar la ventana. Si ya hay una API en el puerto 8000, detén su terminal primero:
+el lanzador no reutiliza ni termina procesos ajenos. Si falla la carga o la
+autenticación, no abre el túnel. Si falla ngrok, también detiene la API que inició.
+La inspección local de tráfico de ngrok se desactiva para no registrar ahí los
+encabezados Bearer. `/info` y `/predict` siguen requiriendo el token de la API.
+
+El archivo `iniciar.bat`, si existe localmente, es independiente y no se modifica.
+Referencia del comando: [CLI oficial de ngrok](https://ngrok.com/docs/gateway/agent/cli).
+
+### Alternativas manuales
+
 Después de obtener `200/ok` local, instalar/configurar una herramienta permitida y
 ejecutar manualmente una de estas opciones en otra terminal:
 
@@ -121,7 +157,8 @@ ngrok http 8000
 Probar la URL HTTPS desde otra red, medir el tiempo total y preparar una segunda
 herramienta como respaldo. Mantener la laptop encendida y conectada. Compartir el
 token por el canal privado acordado, nunca en URLs, capturas o Git. Esta implementación
-no abre túneles, no despliega servicios y no crea el tag `submission`.
+solo abre el túnel cuando ejecutas el lanzador o los comandos manuales; no crea
+el tag `submission`.
 
 Referencias técnicas: [instalación CPU de PyTorch](https://pytorch.org/get-started/locally/),
 [ciclo de vida de FastAPI](https://fastapi.tiangolo.com/advanced/events/) y
