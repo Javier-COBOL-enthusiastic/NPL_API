@@ -4,8 +4,8 @@
 
 | Field | Value |
 |---|---|
-| Team id | [COMPLETAR] (`team-local` was a temporary test value) |
-| Members | Dennys Jefferson Molina Abrego; Javier [COMPLETAR: full name]; [COMPLETAR: remaining members] |
+| Team id | `Imanes` |
+| Members | Dennys Jefferson Molina Abrego; Javier Ernesto Moran Rosales; Diana Raquel Carballo Castillo; Jorge Nicolás Saade Cuestas |
 | Repository URL | https://github.com/Javier-COBOL-enthusiastic/NPL_API |
 | `submission` commit hash | [COMPLETAR] |
 | Public service URL used at the dry run | https://underwent-purge-chase.ngrok-free.dev (preliminary tests; full dry run pending) |
@@ -100,4 +100,4 @@ For sample-05's length problem, [Longformer-Encoder-Decoder](https://arxiv.org/a
 
 ## 9. Known limitations
 
-English extractive QA only; no synthesized, non-contiguous or unsupported yes/no answers. The API rejects inputs beyond 5,000 context characters or 500 question characters. Within those character limits, an overlong tokenized question is shortened to preserve context coverage and stride. Spans are limited to 30 tokens; inference is serialized, so concurrent requests can queue. Five public successes do not establish general accuracy. Official team identity, commit references and extended public testing remain [COMPLETAR].
+English extractive QA only; no synthesized, non-contiguous or unsupported yes/no answers. The API rejects inputs beyond 5,000 context characters or 500 question characters. Within those character limits, an overlong tokenized question is shortened to preserve context coverage and stride. Spans are limited to 30 tokens; inference is serialized, so concurrent requests can queue. Five public successes do not establish general accuracy. Commit references and extended public testing remain [COMPLETAR].
