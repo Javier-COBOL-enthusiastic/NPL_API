@@ -7,7 +7,7 @@
 | Team id | `Imán` |
 | Members | Dennys Jefferson Molina Abrego; Javier Ernesto Moran Rosales; Diana Raquel Carballo Castillo; Jorge Nicolás Saade Cuestas |
 | Repository URL | https://github.com/Javier-COBOL-enthusiastic/NPL_API |
-| `submission` commit hash | [COMPLETAR] |
+| `submission` commit hash | `<hash>` (content commit immediately preceding the commit tagged `submission`; the only difference between them is this line) |
 | Public service URL used at the dry run | https://underwent-purge-chase.ngrok-free.dev (HTTPS dry run completed; scope below) |
 | AI tools used (which, and for what) | Codex: API, authentication, tests, Windows/ngrok launcher, local verification and report drafting. Claude: training notebook, `train.py` and the evaluation script (`evaluate.py` in this repository). |
 
