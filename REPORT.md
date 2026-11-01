@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| Team id | `Imanes` |
+| Team id | `Imán` |
 | Members | Dennys Jefferson Molina Abrego; Javier Ernesto Moran Rosales; Diana Raquel Carballo Castillo; Jorge Nicolás Saade Cuestas |
 | Repository URL | https://github.com/Javier-COBOL-enthusiastic/NPL_API |
 | `submission` commit hash | [COMPLETAR] |
@@ -27,7 +27,7 @@
 | Learning rate and schedule (warmup?) | `3e-5`; linear schedule (Trainer default); 10% warmup, 4,941 steps |
 | Batch size | 8 per device; gradient accumulation 1 |
 | `max_seq_length` / `doc_stride` | 384 / 128 |
-| Hardware and training time | Google Colab, NVIDIA Tesla T4. Logs show 6 h 54 min 26 s elapsed from first training start to final export, including interruptions/restarts. Last resumed call: 2,845.04 s (47 min 25 s). Total active training time cannot be isolated; the earlier 3.5 h/epoch estimate is superseded. |
+| Hardware and training time | Google Colab, NVIDIA Tesla T4. Logs show 6 h 54 min 26 s elapsed from first training start to final export, including interruptions/restarts. Last resumed call: 2,845.04 s (47 min 25 s). Total active training time cannot be isolated. |
 
 Training used Python 3.13.16, PyTorch 2.11.0+cu130 and Transformers 5.20.2, seed 42 and weight decay 0.01.
 
@@ -35,7 +35,7 @@ Training used Python 3.13.16, PyTorch 2.11.0+cu130 and Transformers 5.20.2, seed
 
 **Validation results:** final EM **67.57%**, F1 **70.39%** at threshold −3.0664; predicted-null rate 49.2%, versus 50.07% truly unanswerable. HasAns F1 is **67.08%**, NoAns accuracy **73.69%**. Without abstention, HasAns F1 would be 84.76%, but overall F1 only 42.32%.
 
-**Checkpoint selection:** Trainer automatically retained `checkpoint-16000` (epoch approximately 1; minimum subset `eval_loss` 1.2547). On full validation, it achieved EM 63.51% / F1 66.19% at threshold −0.038. The final epoch-3 checkpoint, **`checkpoint-49410`**, achieved EM 67.57% / F1 70.39% and was exported. Although `eval_loss` rose from approximately 1.25 to 1.6, F1 improved: subset loss was a poor selection criterion here. Evidence: [final-model evaluation](docs/evaluation/final/eval_summary.json); [`checkpoint-16000` evaluation](docs/evaluation/epoch1/eval_summary.json). The summaries confirm a 4.20-point F1 gain at their calibrated thresholds. Training logs confirm the loss-based selection; the final export identity is team-confirmed. See [report evidence](docs/report_evidence.json).
+**Checkpoint selection:** the Trainer's automatic "best checkpoint" (as shown in the training logs and `final_metrics.json`) is `checkpoint-16000` (epoch approximately 1; minimum subset `eval_loss` 1.2547). On full validation, it achieved EM 63.51% / F1 66.19% at threshold −0.038. The final epoch-3 checkpoint, **`checkpoint-49410`**, achieved EM 67.57% / F1 70.39% and was exported and served instead. Although `eval_loss` rose from approximately 1.25 to 1.6, F1 improved: subset loss was a poor selection criterion here. Only these two checkpoints were evaluated on the full validation split. Evidence: [final-model evaluation](docs/evaluation/final/eval_summary.json); [`checkpoint-16000` evaluation](docs/evaluation/epoch1/eval_summary.json). The summaries show a 4.20-point F1 gain at their calibrated thresholds. See [report evidence](docs/report_evidence.json).
 
 ## 3. No-answer threshold
 

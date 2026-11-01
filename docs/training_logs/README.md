@@ -49,8 +49,7 @@ The summaries themselves do not embed checkpoint identifiers.
 The elapsed interval includes interruptions, restart/setup overhead, validation,
 checkpointing and export. The logs do not identify the stop time of each interrupted
 session, so they do not establish total active training time or a measured time per
-epoch. The team's earlier 3.5-hours-per-epoch estimate is superseded by this more
-precise account. No timezone conversion has been assumed.
+epoch.
 
 ## Reproduce the curve
 
