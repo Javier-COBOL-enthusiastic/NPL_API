@@ -1,0 +1,13 @@
+{
+  "threshold": -3.0664472656250004,
+  "rule": "predict null if delta > threshold, delta = null_score - span_score",
+  "score": "sigmoid(|delta - threshold|)",
+  "selection_metric": "SQuAD 2.0 F1 on validation",
+  "max_seq_length": 384,
+  "doc_stride": 128,
+  "n_best": 20,
+  "max_answer_len": 30,
+  "val_f1": 70.38989730396112,
+  "val_exact": 67.57348606081024,
+  "validation_examples": 11873
+}

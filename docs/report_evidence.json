@@ -231,7 +231,7 @@
   },
   "team_supplied_training_clarifications": {
     "source": "User-provided training review in this conversation, 2026-10-29.",
-    "verification_status": "Both evaluation summaries confirm the reported full-validation metrics. The supplied training logs now confirm checkpoint-16000 as the automatic best-loss model (1.2546775), epoch-3 loss 1.6062064 and a distinct post-restore loss of 1.2545213. The final checkpoint-49410 export identity remains team-confirmed; summaries have no checkpoint-id field. No-abstention metrics and threshold stability range remain team-supplied without the threshold sweep artifact.",
+    "verification_status": "Both evaluation summaries confirm full-validation metrics; training logs confirm loss-based checkpoint selection. Final calibration CSV and prediction audit now verify no-abstention metrics and stability at sampled thresholds; see docs/evaluation/final/calibration_verification.json. Final checkpoint-49410 identity remains team-confirmed; artifacts contain no model hash.",
     "validation": {
       "examples": 11873,
       "answerable": 5928,
@@ -371,5 +371,946 @@
     "total_active_training_seconds": null,
     "time_note": "Elapsed log-clock interval, not summed active computation. Logs do not supply interrupted-session stop times. No timezone assumed.",
     "curve_note": "The original plot merges the post-restore evaluation into the training curve. loss_curves.png reconstructs log_history.json with that evaluation as a separate marker; epoch-3 loss remains 1.6062."
+  },
+  "verified_calibration_artifacts": "docs/evaluation/final/calibration_verification.json",
+  "verified_https_run": {
+    "utc": "2026-11-01T03:42:14.843165+00:00",
+    "url": "https://underwent-purge-chase.ngrok-free.dev",
+    "origin": "User computer through public HTTPS tunnel; not an independent remote client",
+    "commit": "d1fb6dd42d6c1c65f2af39733f2a23c5efa550b4",
+    "checks": [
+      {
+        "path": "/info",
+        "case": "no_token",
+        "status": 401
+      },
+      {
+        "path": "/predict",
+        "case": "no_token",
+        "status": 401
+      },
+      {
+        "path": "/info",
+        "case": "wrong_token",
+        "status": 401
+      },
+      {
+        "path": "/predict",
+        "case": "wrong_token",
+        "status": 401
+      },
+      {
+        "path": "/info",
+        "case": "lowercase_scheme",
+        "status": 401
+      },
+      {
+        "path": "/predict",
+        "case": "lowercase_scheme",
+        "status": 401
+      }
+    ],
+    "health_s": 0.351387300001079,
+    "info": {
+      "team": "Imanes",
+      "model": "distilbert/distilbert-base-uncased",
+      "params": 66364418,
+      "max_seq_length": 384,
+      "doc_stride": 128
+    },
+    "samples": [
+      {
+        "id": "sample-01",
+        "http_s": 0.2883995000011055,
+        "status": 200,
+        "answer": "16",
+        "start": 383,
+        "score": 0.9891381269637458,
+        "contract_valid": true,
+        "correct": true,
+        "expected": [
+          {
+            "text": "16",
+            "start": 383
+          },
+          {
+            "text": "16 attention heads",
+            "start": 383
+          }
+        ]
+      },
+      {
+        "id": "sample-02",
+        "http_s": 0.2389458999987255,
+        "status": 200,
+        "answer": "3.5 days",
+        "start": 437,
+        "score": 0.9844221670017697,
+        "contract_valid": true,
+        "correct": true,
+        "expected": [
+          {
+            "text": "3.5 days",
+            "start": 437
+          }
+        ]
+      },
+      {
+        "id": "sample-03",
+        "http_s": 0.24006399999962014,
+        "status": 200,
+        "answer": null,
+        "start": null,
+        "score": 0.9986701924452243,
+        "contract_valid": true,
+        "correct": true,
+        "expected": null
+      },
+      {
+        "id": "sample-04",
+        "http_s": 0.24212330000045768,
+        "status": 200,
+        "answer": null,
+        "start": null,
+        "score": 0.5827122890175385,
+        "contract_valid": true,
+        "correct": true,
+        "expected": null
+      },
+      {
+        "id": "sample-05",
+        "http_s": 0.8849700000009761,
+        "status": 200,
+        "answer": "50,257",
+        "start": 3157,
+        "score": 0.9997844435995239,
+        "contract_valid": true,
+        "correct": true,
+        "expected": [
+          {
+            "text": "50,257",
+            "start": 3157
+          },
+          {
+            "text": "50,257 tokens",
+            "start": 3157
+          }
+        ]
+      }
+    ],
+    "sample_summary": {
+      "count": 5,
+      "correct": 5,
+      "contract_valid": 5,
+      "http_mean_s": 0.378900540000177,
+      "http_max_s": 0.8849700000009761,
+      "over_5s": 0,
+      "errors": 0
+    },
+    "load_50": {
+      "count": 50,
+      "correct": 50,
+      "contract_valid": 50,
+      "http_mean_s": 0.385247503999999,
+      "http_max_s": 1.0539284000005864,
+      "over_5s": 0,
+      "errors": 0,
+      "total_s": 19.272026700000424,
+      "description": "Five public cases repeated ten times sequentially: 20 short answerable, 20 unanswerable, 10 long context",
+      "cases": [
+        {
+          "id": "sample-01",
+          "http_s": 0.2519579999989219,
+          "status": 200,
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "16",
+              "start": 383
+            },
+            {
+              "text": "16 attention heads",
+              "start": 383
+            }
+          ]
+        },
+        {
+          "id": "sample-02",
+          "http_s": 0.24023619999934454,
+          "status": 200,
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "3.5 days",
+              "start": 437
+            }
+          ]
+        },
+        {
+          "id": "sample-03",
+          "http_s": 0.23998550000032992,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-04",
+          "http_s": 0.24382879999939178,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-05",
+          "http_s": 0.9134125999989919,
+          "status": 200,
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "50,257",
+              "start": 3157
+            },
+            {
+              "text": "50,257 tokens",
+              "start": 3157
+            }
+          ]
+        },
+        {
+          "id": "sample-01",
+          "http_s": 0.2731311999996251,
+          "status": 200,
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "16",
+              "start": 383
+            },
+            {
+              "text": "16 attention heads",
+              "start": 383
+            }
+          ]
+        },
+        {
+          "id": "sample-02",
+          "http_s": 0.24857929999961925,
+          "status": 200,
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "3.5 days",
+              "start": 437
+            }
+          ]
+        },
+        {
+          "id": "sample-03",
+          "http_s": 0.24152030000004743,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-04",
+          "http_s": 0.24166979999972682,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-05",
+          "http_s": 0.9613614000008965,
+          "status": 200,
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "50,257",
+              "start": 3157
+            },
+            {
+              "text": "50,257 tokens",
+              "start": 3157
+            }
+          ]
+        },
+        {
+          "id": "sample-01",
+          "http_s": 0.25201620000007097,
+          "status": 200,
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "16",
+              "start": 383
+            },
+            {
+              "text": "16 attention heads",
+              "start": 383
+            }
+          ]
+        },
+        {
+          "id": "sample-02",
+          "http_s": 0.2661946000007447,
+          "status": 200,
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "3.5 days",
+              "start": 437
+            }
+          ]
+        },
+        {
+          "id": "sample-03",
+          "http_s": 0.2629910999985441,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-04",
+          "http_s": 0.28596900000047754,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-05",
+          "http_s": 1.0539284000005864,
+          "status": 200,
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "50,257",
+              "start": 3157
+            },
+            {
+              "text": "50,257 tokens",
+              "start": 3157
+            }
+          ]
+        },
+        {
+          "id": "sample-01",
+          "http_s": 0.27250029999959224,
+          "status": 200,
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "16",
+              "start": 383
+            },
+            {
+              "text": "16 attention heads",
+              "start": 383
+            }
+          ]
+        },
+        {
+          "id": "sample-02",
+          "http_s": 0.24152119999962451,
+          "status": 200,
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "3.5 days",
+              "start": 437
+            }
+          ]
+        },
+        {
+          "id": "sample-03",
+          "http_s": 0.23292269999910786,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-04",
+          "http_s": 0.2492831000017759,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-05",
+          "http_s": 0.8955578000004607,
+          "status": 200,
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "50,257",
+              "start": 3157
+            },
+            {
+              "text": "50,257 tokens",
+              "start": 3157
+            }
+          ]
+        },
+        {
+          "id": "sample-01",
+          "http_s": 0.2591424000002007,
+          "status": 200,
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "16",
+              "start": 383
+            },
+            {
+              "text": "16 attention heads",
+              "start": 383
+            }
+          ]
+        },
+        {
+          "id": "sample-02",
+          "http_s": 0.2475931999997556,
+          "status": 200,
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "3.5 days",
+              "start": 437
+            }
+          ]
+        },
+        {
+          "id": "sample-03",
+          "http_s": 0.23206589999972493,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-04",
+          "http_s": 0.2602618999990227,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-05",
+          "http_s": 1.053385100000014,
+          "status": 200,
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "50,257",
+              "start": 3157
+            },
+            {
+              "text": "50,257 tokens",
+              "start": 3157
+            }
+          ]
+        },
+        {
+          "id": "sample-01",
+          "http_s": 0.25044309999975667,
+          "status": 200,
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "16",
+              "start": 383
+            },
+            {
+              "text": "16 attention heads",
+              "start": 383
+            }
+          ]
+        },
+        {
+          "id": "sample-02",
+          "http_s": 0.24532319999889296,
+          "status": 200,
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "3.5 days",
+              "start": 437
+            }
+          ]
+        },
+        {
+          "id": "sample-03",
+          "http_s": 0.2608890999999858,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-04",
+          "http_s": 0.25466190000042843,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-05",
+          "http_s": 0.8816991000003327,
+          "status": 200,
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "50,257",
+              "start": 3157
+            },
+            {
+              "text": "50,257 tokens",
+              "start": 3157
+            }
+          ]
+        },
+        {
+          "id": "sample-01",
+          "http_s": 0.2523687000011705,
+          "status": 200,
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "16",
+              "start": 383
+            },
+            {
+              "text": "16 attention heads",
+              "start": 383
+            }
+          ]
+        },
+        {
+          "id": "sample-02",
+          "http_s": 0.2433815999993385,
+          "status": 200,
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "3.5 days",
+              "start": 437
+            }
+          ]
+        },
+        {
+          "id": "sample-03",
+          "http_s": 0.2363736000006611,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-04",
+          "http_s": 0.24653570000009495,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-05",
+          "http_s": 0.8686388999994961,
+          "status": 200,
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "50,257",
+              "start": 3157
+            },
+            {
+              "text": "50,257 tokens",
+              "start": 3157
+            }
+          ]
+        },
+        {
+          "id": "sample-01",
+          "http_s": 0.26407930000095803,
+          "status": 200,
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "16",
+              "start": 383
+            },
+            {
+              "text": "16 attention heads",
+              "start": 383
+            }
+          ]
+        },
+        {
+          "id": "sample-02",
+          "http_s": 0.23847159999968426,
+          "status": 200,
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "3.5 days",
+              "start": 437
+            }
+          ]
+        },
+        {
+          "id": "sample-03",
+          "http_s": 0.23452440000073693,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-04",
+          "http_s": 0.24817000000075495,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-05",
+          "http_s": 0.8727447999990545,
+          "status": 200,
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "50,257",
+              "start": 3157
+            },
+            {
+              "text": "50,257 tokens",
+              "start": 3157
+            }
+          ]
+        },
+        {
+          "id": "sample-01",
+          "http_s": 0.2621706999998423,
+          "status": 200,
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "16",
+              "start": 383
+            },
+            {
+              "text": "16 attention heads",
+              "start": 383
+            }
+          ]
+        },
+        {
+          "id": "sample-02",
+          "http_s": 0.2536830999997619,
+          "status": 200,
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "3.5 days",
+              "start": 437
+            }
+          ]
+        },
+        {
+          "id": "sample-03",
+          "http_s": 0.2637291999999434,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-04",
+          "http_s": 0.24924529999952938,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-05",
+          "http_s": 0.8678245000010065,
+          "status": 200,
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "50,257",
+              "start": 3157
+            },
+            {
+              "text": "50,257 tokens",
+              "start": 3157
+            }
+          ]
+        },
+        {
+          "id": "sample-01",
+          "http_s": 0.2470764000008785,
+          "status": 200,
+          "answer": "16",
+          "start": 383,
+          "score": 0.9891381269637458,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "16",
+              "start": 383
+            },
+            {
+              "text": "16 attention heads",
+              "start": 383
+            }
+          ]
+        },
+        {
+          "id": "sample-02",
+          "http_s": 0.23855639999965206,
+          "status": 200,
+          "answer": "3.5 days",
+          "start": 437,
+          "score": 0.9844221670017697,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "3.5 days",
+              "start": 437
+            }
+          ]
+        },
+        {
+          "id": "sample-03",
+          "http_s": 0.23381370000060997,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.9986701924452243,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-04",
+          "http_s": 0.24894599999970524,
+          "status": 200,
+          "answer": null,
+          "start": null,
+          "score": 0.5827122890175385,
+          "contract_valid": true,
+          "correct": true,
+          "expected": null
+        },
+        {
+          "id": "sample-05",
+          "http_s": 0.8780089000010776,
+          "status": 200,
+          "answer": "50,257",
+          "start": 3157,
+          "score": 0.9997844435995239,
+          "contract_valid": true,
+          "correct": true,
+          "expected": [
+            {
+              "text": "50,257",
+              "start": 3157
+            },
+            {
+              "text": "50,257 tokens",
+              "start": 3157
+            }
+          ]
+        }
+      ]
+    },
+    "final_health": {
+      "status": "ok"
+    }
+  },
+  "independent_network_health_check": {
+    "source": "User-reported observation, not performed by this inspection",
+    "client": "Phone connected to a different Wi-Fi network away from server",
+    "endpoint": "/health",
+    "response": {
+      "status": "ok"
+    },
+    "authenticated_predictions_tested": false
   }
 }
